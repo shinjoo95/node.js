@@ -3,11 +3,12 @@
     동적인 UI만드는 법 
     1. UI의 현재 상태를 데이터로 저장해둠
     2. 데이터에 따라 UI가 어떻게 보일지 작성 
-    조건식 v-if 조건식이 참일 때만 html을 보여줌 -->
+    조건식 v-if 조건식이 참일 때만 html을 보여줌 
+    v-if="조건식" v-else-if v-else -->
     <div class="black-bg" v-if="modal == true">
       <div class="white-bg">
-        <h4>상세페이지</h4>
-        <p>상세페이지 내용</p>
+        <h4>{{oneroom[click].title}}</h4> <!-- 사용자가 누른 상품 번호로 -->
+        <p>{{oneroom[click].content}}</p>
         <button @click="modal=false">닫기</button>
       </div>
     </div>
@@ -28,14 +29,15 @@
     <!-- html 태그안의 속성 데이터바인딩은 :어쩌꾸
           html 태그안의 내용 데이터바인딩은 {{어쩌구}}-->
     <img :src="a.image" class="room-img">
-    <h4 @click="modal = true">{{a.title}}</h4>
+    <h4 @click="modal = true; click = i">{{a.title}}</h4>
     <p>{{a.price}}원</p>
     <!-- 이벤트 핸들러 html 클릭시 코드 실행하는 법
           v-on:click="", @click=""
           여러가지 이벤트 사용가능 @mouseover,-->
     <!-- <button @click="신고수[0]++">허위매물신고버튼</button> <span>신고수 : {{신고수[0]}}</span>   -->
   </div>
-  <!-- <div>
+  <!--위 반복문으로 변경으로 주석처리
+    <div>
     <img src="./assets/room1.jpg" class="room-img">
     <h4  @click="modal = true">{{products[1]}}</h4>
     <p>80 만원</p>
@@ -64,6 +66,7 @@ export default {
   data(){
     //state UI의 상태를 저장해주는 곳 
     return{
+      click : 0,
       oneroom : data,
       modal : false,
       신고수 : [0,0,0],
