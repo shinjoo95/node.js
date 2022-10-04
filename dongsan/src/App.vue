@@ -24,33 +24,34 @@
     <h4 >{{a}}</h4>           //html 속성도 데이터바인딩 가능 :속성="데이터이름"
     <p> 60 만원</p>
   </div> -->
-  <div>
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4 @click="modal = true">{{products[0]}}</h4>
-    <p>50 만원</p>
+  <div v-for="(a,i) in oneroom" :key="i">
+    <!-- html 태그안의 속성 데이터바인딩은 :어쩌꾸
+          html 태그안의 내용 데이터바인딩은 {{어쩌구}}-->
+    <img :src="a.image" class="room-img">
+    <h4 @click="modal = true">{{a.title}}</h4>
+    <p>{{a.price}}원</p>
     <!-- 이벤트 핸들러 html 클릭시 코드 실행하는 법
           v-on:click="", @click=""
           여러가지 이벤트 사용가능 @mouseover,-->
-    <button @click="신고수[0]++">허위매물신고버튼</button> <span>신고수 : {{신고수[0]}}</span>  
+    <!-- <button @click="신고수[0]++">허위매물신고버튼</button> <span>신고수 : {{신고수[0]}}</span>   -->
   </div>
-  <div>
+  <!-- <div>
     <img src="./assets/room1.jpg" class="room-img">
     <h4  @click="modal = true">{{products[1]}}</h4>
-    <p>70 만원</p>
-    <button @click="신고수[1]++">허위매물신고버튼</button> <span>신고수 : {{신고수[1]}}</span>  
+    <p>80 만원</p>
   </div>
   <div>
     <img src="./assets/room2.jpg" class="room-img">
     <h4  @click="modal = true">{{products[2]}}</h4>
     <p>80 만원</p>
-    <button @click="신고수[2]++">허위매물신고버튼</button> <span>신고수 : {{신고수[2]}}</span>  
-  </div>
+
+  </div> -->
 
 
 </template>
 
 <script>
-
+import data from './data.js';
 
 export default {
 //데이터 바인딩
@@ -63,6 +64,7 @@ export default {
   data(){
     //state UI의 상태를 저장해주는 곳 
     return{
+      oneroom : data,
       modal : false,
       신고수 : [0,0,0],
       메뉴 : ['home', 'shop', 'about'],
