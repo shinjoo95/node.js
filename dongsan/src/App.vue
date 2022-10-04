@@ -1,4 +1,16 @@
 <template>
+  <!-- 모달창 만들기
+    동적인 UI만드는 법 
+    1. UI의 현재 상태를 데이터로 저장해둠
+    2. 데이터에 따라 UI가 어떻게 보일지 작성 
+    조건식 v-if 조건식이 참일 때만 html을 보여줌 -->
+    <div class="black-bg" v-if="modal == true">
+      <div class="white-bg">
+        <h4>상세페이지</h4>
+        <p>상세페이지 내용</p>
+        <button @click="modal=false">닫기</button>
+      </div>
+    </div>
      <!-- 반복문으로 메뉴 만들기 
       <태그 v-for = " 작명 in 몇회?(데이터도 넣을 수 있음) :key="작명">
       :key=""용도 - 반복문 쓸 때 꼭 써야됨, 반복문 돌린 요소를 컴퓨터가 구분하기 위해 씀 
@@ -13,7 +25,8 @@
     <p> 60 만원</p>
   </div> -->
   <div>
-    <h4>{{products[0]}}</h4>
+    <img src="./assets/room0.jpg" class="room-img">
+    <h4 @click="modal = true">{{products[0]}}</h4>
     <p>50 만원</p>
     <!-- 이벤트 핸들러 html 클릭시 코드 실행하는 법
           v-on:click="", @click=""
@@ -21,12 +34,14 @@
     <button @click="신고수[0]++">허위매물신고버튼</button> <span>신고수 : {{신고수[0]}}</span>  
   </div>
   <div>
-    <h4>{{products[1]}}</h4>
+    <img src="./assets/room1.jpg" class="room-img">
+    <h4  @click="modal = true">{{products[1]}}</h4>
     <p>70 만원</p>
     <button @click="신고수[1]++">허위매물신고버튼</button> <span>신고수 : {{신고수[1]}}</span>  
   </div>
   <div>
-    <h4>{{products[2]}}</h4>
+    <img src="./assets/room2.jpg" class="room-img">
+    <h4  @click="modal = true">{{products[2]}}</h4>
     <p>80 만원</p>
     <button @click="신고수[2]++">허위매물신고버튼</button> <span>신고수 : {{신고수[2]}}</span>  
   </div>
@@ -46,7 +61,9 @@ export default {
 //3. 자주 변경되는 데이터 위주로 저장해서 뺴 쓰기 
   name: 'App',
   data(){
+    //state UI의 상태를 저장해주는 곳 
     return{
+      modal : false,
       신고수 : [0,0,0],
       메뉴 : ['home', 'shop', 'about'],
       //데이터는 object 자료로 저장
@@ -88,5 +105,28 @@ export default {
   color: white;
   padding : 10px;
   font-size: 20px;
+}
+.room-img{
+  width: 100%;
+  margin-top: 40px;
+}
+body{
+  margin: 0;
+}
+div{
+  box-sizing:  border-box;
+}
+.black-bg{
+  width: 100%;
+  height: 100%;
+  background: (0,0,0,0.5);
+  position: fixed;
+  padding: 20px
+}
+.white-bg{
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
 }
 </style>
