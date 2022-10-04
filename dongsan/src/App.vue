@@ -7,18 +7,29 @@
      <div class="menu">
       <a v-for="a in 메뉴" :key="a">{{a}}</a> <!-- 변수 작명은 2개까지 가능,(a,i) 왼쪽변수는 array내의 데이터, 오른쪽변수는 1씩 증가하는 정수 -->
     </div>
-  <div v-for="(a,i) in products" :key="i">
-    <h4 >{{products[i]}}</h4>  <!-- html 속성도 데이터바인딩 가능 :속성="데이터이름"-->
+
+  <!-- <div v-for="(a,i) in products" :key="i">
+    <h4 >{{a}}</h4>           //html 속성도 데이터바인딩 가능 :속성="데이터이름"
     <p> 60 만원</p>
-  </div>
-  <!-- <div>
-    <h4>{{products[1]}}</h4>
+  </div> -->
+  <div>
+    <h4>{{products[0]}}</h4>
     <p>50 만원</p>
+    <!-- 이벤트 핸들러 html 클릭시 코드 실행하는 법
+          v-on:click="", @click=""
+          여러가지 이벤트 사용가능 @mouseover,-->
+    <button @click="신고수[0]++">허위매물신고버튼</button> <span>신고수 : {{신고수[0]}}</span>  
+  </div>
+  <div>
+    <h4>{{products[1]}}</h4>
+    <p>70 만원</p>
+    <button @click="신고수[1]++">허위매물신고버튼</button> <span>신고수 : {{신고수[1]}}</span>  
   </div>
   <div>
     <h4>{{products[2]}}</h4>
     <p>80 만원</p>
-  </div> -->
+    <button @click="신고수[2]++">허위매물신고버튼</button> <span>신고수 : {{신고수[2]}}</span>  
+  </div>
 
 
 </template>
@@ -36,10 +47,22 @@ export default {
   name: 'App',
   data(){
     return{
+      신고수 : [0,0,0],
       메뉴 : ['home', 'shop', 'about'],
       //데이터는 object 자료로 저장
       font : 'color:blue',
       products : ['역삼동원룸', '천호동원룸','마포구원룸']
+    }
+  },
+  //vue에서 함수를 만들고 싶으면
+  //methods:{함수(){}}
+  //함수 안에서 데이터를 쓸 땐 this.데이터명 
+  methods : {
+    increase(){
+      this.신고수 += 1;
+    },
+    함수2(){
+
     }
   },
   components: {
