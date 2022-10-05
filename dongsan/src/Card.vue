@@ -6,10 +6,10 @@
     <h4 >{{a}}</h4>               //html 속성도 데이터바인딩 가능 :속성="데이터이름"
     <p> 60 만원</p>   </div> -->
 
-    <div v-for="(a,i) in oneroom" :key="i">
-        <img :src="a.image" class="room-img">
-        <h4>{{a.title}}</h4>
-        <p>{{a.price}}원</p>
+    <div>
+        <img :src="room.image" class="room-img">
+        <h4>{{room.title}}</h4>
+        <p>{{room.price}}원</p>
     </div>
     <!-- 이벤트 핸들러 html 클릭시 코드 실행하는 법
           v-on:click="", @click=""
@@ -33,7 +33,7 @@
 export default {
     name: 'theCard',
     props : {           
-        oneroom: Object,
+        room: Object,
     }
 }
 </script>

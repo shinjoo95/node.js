@@ -17,7 +17,7 @@
     <Discount/> 
 
     <!-- 컴포넌트 만들기 Card.vue-->
-    <Card :oneroom = 'oneroom'/>
+    <Card :room='oneroom[i]' v-for='(room,i) in oneroom' :key='room'/>
 
 
 </template>
