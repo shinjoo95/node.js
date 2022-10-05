@@ -19,6 +19,11 @@
     <!-- 배너만들기 Discount.vue -->
     <Discount/> 
 
+    <!-- 정렬버튼 만들기 -->
+    <!-- [3,5,2].sort() -> 2,3,5 : 가나다순 정렬 -->
+    <button @click="priceSort">가격순정렬</button>
+    <button @click="sortBack">되돌리기</button>
+
     <!-- 컴포넌트 만들기 Card.vue 
     @click 이벤트를 컴포넌트에 적용할 시 이벤트 버블링 현상이 발생함 (상위 요소까지 포함됨 )
     부모 요소의 데이터를 바꿀 수가 없으니 메세지를 호출해서 적용시킴
@@ -48,8 +53,9 @@ export default {
   data(){
     //state UI의 상태를 저장해주는 곳 
     return{
+      roomOrigin : [...data],  //데이터 카피본, 별개의 사본  
       click : 0,
-      oneroom : data,
+      oneroom : data,       //데이터 원본
       modalOn : false,
       신고수 : [0,0,0],
       메뉴 : ['home', 'shop', 'about'],
@@ -65,8 +71,15 @@ export default {
     increase(){
       this.신고수 += 1;
     },
-    함수2(){
-
+    sortBack(){
+      // this.oneroom = this.roomOrigin;    //값을 공유해주세요라는 뜻임 
+      this.oneroom = [...this.roomOrigin];  //복사본으로 만들어 사용
+    },
+    priceSort(){
+      this.oneroom.sort(function(a,b){
+        return a.price - b.price
+      //sort()하면 원본이 변형됨 , Map() filter()등은 원본을 보존해줌
+      }) 
     }
   },
   components: {
