@@ -17,7 +17,10 @@
     </div>
 
     <!-- 배너만들기 Discount.vue -->
-    <Discount/> 
+    <!-- lifecycle : 컴포넌트는 웹페이지에 표시되기까지 일련의 step을 거침 그 step을 라이프사이클이라함 
+        create단계 -> mount단계(template사이에 있던걸 실제 html로 바꿔줌) -> 컴포넌트 
+        lifecycle Hook을 걸어서 단계 중간에 원하는 코드를 실행가능함  -->
+    <Discount v-if="showDiscount == true"/> 
 
     <!-- 정렬버튼 만들기 -->
     <!-- [3,5,2].sort() -> 2,3,5 : 가나다순 정렬 -->
@@ -53,6 +56,7 @@ export default {
   data(){
     //state UI의 상태를 저장해주는 곳 
     return{
+      showDiscount : true,
       roomOrigin : [...data],  //데이터 카피본, 별개의 사본  
       click : 0,
       oneroom : data,       //데이터 원본
@@ -81,6 +85,13 @@ export default {
       //sort()하면 원본이 변형됨 , Map() filter()등은 원본을 보존해줌
       }) 
     }
+  },
+
+  //lifecycle Hook -> created(){ 서버에서 가져올 데이터들 ~ }, mounted()
+  mounted(){      //컴포넌트가 다 장착된 상태
+    setTimeout(()=>{              //함수안에 this를 사용할 시 arrow function을 사용해야됨 
+      this.showDiscount = false;
+    }, 2000);
   },
   components: {
     Discount: theDiscount,
