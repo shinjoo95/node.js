@@ -9,6 +9,7 @@
       <div class="white-bg">
         <h4>{{oneroom[click].title}}</h4> <!-- 사용자가 누른 상품 번호로 -->
         <p>{{oneroom[click].content}}</p>
+        <p>{{oneroom[click].price}}원</p>
         <button @click="modal=false">닫기</button>
       </div>
     </div>
@@ -20,6 +21,13 @@
      <div class="menu">
       <a v-for="a in 메뉴" :key="a">{{a}}</a> <!-- 변수 작명은 2개까지 가능,(a,i) 왼쪽변수는 array내의 데이터, 오른쪽변수는 1씩 증가하는 정수 -->
     </div>
+
+    
+    <!-- 배너만들기 Discount.vue -->
+    <Discount/> 
+
+      
+
 
   <!-- <div v-for="(a,i) in products" :key="i">
     <h4 >{{a}}</h4>           //html 속성도 데이터바인딩 가능 :속성="데이터이름"
@@ -54,6 +62,8 @@
 
 <script>
 import data from './data.js';
+import theDiscount from './Discount.vue';
+
 
 export default {
 //데이터 바인딩
@@ -88,8 +98,8 @@ export default {
     }
   },
   components: {
-   
-  }
+    Discount : theDiscount,
+}
 }
 </script>
 
@@ -133,5 +143,11 @@ div{
   background: white;
   border-radius: 8px;
   padding: 20px;
+}
+.discount{
+  background: #eee;
+  padding : 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 </style>
