@@ -1,10 +1,12 @@
 <template>
 
     <!-- Modal.vue 모달창 컴포넌트 만들기 (props)
-    <자식 :데이터이름 = '데이터이름'/> -->
+     애니메이션효과 주기  -->
+    <transition name="fade">
+    <!--<자식 :데이터이름 = '데이터이름'/> -->
     <Modal :oneroom = 'oneroom' :click='click' :modalOn='modalOn'
     @closeModal = "modalOn =false"/>
-
+    </transition>
      <!-- 반복문으로 메뉴 만들기 
       <태그 v-for = " 작명 in 몇회?(데이터도 넣을 수 있음) :key="작명">
       :key=""용도 - 반복문 쓸 때 꼭 써야됨, 반복문 돌린 요소를 컴퓨터가 구분하기 위해 씀 
@@ -122,4 +124,25 @@ div{
   margin: 10px;
   border-radius: 5px;
 }
+/** vue 애니메이션 효과 주기 (띄울때) */
+.fade-enter-from{         /* 시작 */
+  opacity: 0;
+}
+.fade-enter-active{      /* transition */
+  transition: all 1s;
+}
+.fade-enter-to{          /* 끝 */
+  opacity: 1;
+}
+/** vue 애니메이션 효과 주기 (닫을 때) */
+.fade-leave-from{         /* 시작 */
+  opacity: 1;
+}
+.fade-leave-active{      /* transition */
+  transition: all 1s;
+}
+.fade-leave-to{          /* 끝 */
+  opacity: 0;
+}
+
 </style>
