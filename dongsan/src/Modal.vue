@@ -27,6 +27,22 @@ export default {
           month : 1,      //문자로 받고 싶을 땐 초기값을 문자로 설정해놓으면 됨, input에 입력한 것은 전부 문자자료형 
       }                   //자바스크립트는 자료형을 잘 다뤄서 문자형 숫자형 곱셈 잘 됨, v-model.number 숫자로 강제 변환 
     },
+
+    watch : {             //데이터감시 watcher,  
+      month(a){            //watch:{감시할데이터(){}}
+      //사용자가 month에 입력한 데이터가 문자면 경고창 
+        if(isNaN(a) == true){   //isNaN() 안에 숫자를 입력하면 false, 글자는 true, '123' 이런 글자도 숫자로 인식
+          alert('문자금지');
+          this.month = 1;
+        }
+      
+      //사용자가 month에 입력한 데이터가 13보다 크면 경고창 
+      // if(a >= 13){              //파라미터a 를 추가하여 month 데이터 사용
+      //   alert('13개월 이상 불가')
+      // }
+      }                  
+    },
+    
     props : {            //props:{데이터이름: 자료형이름}   자식은 props로 받은거 등록
         oneroom: Array,  //받아온 데이터의 자료형 이름을 대문자로, 디버깅용도
         click: Number,
