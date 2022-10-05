@@ -2,7 +2,8 @@
 
     <!-- Modal.vue 모달창 컴포넌트 만들기 (props)
     <자식 :데이터이름 = '데이터이름'/> -->
-    <Modal :oneroom = 'oneroom' :click='click' :modalOn='modalOn'/>
+    <Modal :oneroom = 'oneroom' :click='click' :modalOn='modalOn'
+    @closeModal = "modalOn =false"/>
 
      <!-- 반복문으로 메뉴 만들기 
       <태그 v-for = " 작명 in 몇회?(데이터도 넣을 수 있음) :key="작명">
@@ -16,8 +17,12 @@
     <!-- 배너만들기 Discount.vue -->
     <Discount/> 
 
-    <!-- 컴포넌트 만들기 Card.vue-->
-    <Card :room='oneroom[i]' v-for='(room,i) in oneroom' :key='room'/>
+    <!-- 컴포넌트 만들기 Card.vue 
+    @click 이벤트를 컴포넌트에 적용할 시 이벤트 버블링 현상이 발생함 (상위 요소까지 포함됨 )
+    부모 요소의 데이터를 바꿀 수가 없으니 메세지를 호출해서 적용시킴
+    $evnet 자식이 보낸 데이터는 이벤트 변수에 담겨있음  -->
+    <Card @openModal="modalOn = true; click = $event" 
+    :room='oneroom[i]' v-for='(room,i) in oneroom' :key='room'/>
 
 
 </template>

@@ -11,7 +11,7 @@
         <h4>{{oneroom[click].title}}</h4> <!-- 사용자가 누른 상품 번호로 -->
         <p>{{oneroom[click].content}}</p>
         <p>{{oneroom[click].price}}원</p>
-        <button @click="modal=false">닫기</button>
+        <button @click="$emit('closeModal')">닫기</button>
       </div>
     </div>
 </template>
@@ -36,3 +36,4 @@ export default {
     - 데이터를 보내고, 등록하고, 사용 
     (주의) props는 read-only 이기 떄문에 수정하면 안됨 
     데이터를 만들 땐 데이터 사용하는 곳들 중 최상위 컴포넌트에 만드는게 전송하기 편리함 -->
+

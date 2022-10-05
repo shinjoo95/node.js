@@ -8,7 +8,10 @@
 
     <div>
         <img :src="room.image" class="room-img">
-        <h4>{{room.title}}</h4>
+        <!-- custom event 부모데이터 수정해달라하는 메세지임 
+            부모 요소의 데이터를 바꿀 수가 없으니 메세지를 호출해서 적용시킴
+            $emit('작명', 데이터 ) -> 부모에게 메세지 보내기 -->
+        <h4 @click="$emit('openModal', room.id)">{{room.title}}</h4>
         <p>{{room.price}}원</p>
     </div>
     <!-- 이벤트 핸들러 html 클릭시 코드 실행하는 법
