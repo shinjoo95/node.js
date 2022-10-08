@@ -28,18 +28,33 @@
     </div>
   </div>
 </nav>
+<div class="container mt-4">
+  <h5>VUE 개발자의 블로그입니다.</h5>
+  <p> VUE.js로 생성했습니다</p>
+</div>
+<!--props :작명 = "데이터"-->
+<List :블로그글 = "블로그글"/>
+
 </template>
 
 <script>
-
+import List from './components/List.vue';
+import blog from './assets/blog.js';
 
 export default {
   name: 'App',
+  data(){
+    return{
+      블로그글 : blog
+    }
+  },
+
   components: {
-   
+   List : List,
   }
 }
 </script>
+
 
 <style>
 #app {
