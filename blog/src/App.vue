@@ -2,7 +2,11 @@
   1. bootstrap install
   2. main.js 
   import 'bootstrap'
-  import 'bootstrap/dist/css/bootstrap.min.css'-->
+  import 'bootstrap/dist/css/bootstrap.min.css'
+  vue router
+  1.npm install vue-router@4 설치
+  2. main.js     .use(라우터만든거)
+  3. <router-view></router-view> -->
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
@@ -28,18 +32,28 @@
     </div>
   </div>
 </nav>
-<div class="container mt-4">
+<!-- <div class="container mt-4">
   <h5>VUE 개발자의 블로그입니다.</h5>
   <p> VUE.js로 생성했습니다</p>
+</div> -->
+
+<!-- 다른 페이지 이동링크 -->
+<router-link to="/" style="padding: 10px">홈페이지</router-link>
+<router-link to="/list">리스트</router-link>
+
+
+<div class="mt-4">
+<router-view :블로그글 = '블로그글'></router-view>
 </div>
 <!--props :작명 = "데이터"-->
-<List :블로그글 = "블로그글"/>
+<!-- <List :블로그글 = "블로그글"/> -->
 
 </template>
 
 <script>
-import List from './components/List.vue';
+// import List from './components/List.vue';
 import blog from './assets/blog.js';
+
 
 export default {
   name: 'App',
@@ -50,7 +64,7 @@ export default {
   },
 
   components: {
-   List : List,
+  //  List : List,
   }
 }
 </script>
