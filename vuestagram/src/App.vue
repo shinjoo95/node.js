@@ -11,7 +11,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container />
+  <Container :게시글 = "게시글"/>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -45,9 +45,6 @@ body {
 ul {
   padding: 5px;
   list-style-type: none;
-}
-div {
-  text-align: center;
 }
 .logo {
   width: 22px;
