@@ -1,5 +1,9 @@
 <!-- 구성 
-  상단 : app.vue  본문 : container.vue (+post.vue) 하단 : 메뉴-->
+  상단 : app.vue  본문 : container.vue (+post.vue) 하단 : 메뉴
+  더보기버튼 : 서버에서 더보기 게시물을 가져옴 그 데이터를 html로 보여줄것 -> ajax 
+  GET요청 : 데이터를 서버에서 가져올 때 / POST 요청 : 서버로 데이터를 내보낼 때 
+  GET or POST 요청하면 브라우저가 새로고침 됨 새로고침 없이 실행하고 싶을 땐 ajax 사용 
+  ajax 요청하려면 1. axios 라이브러리 사용 / 2. fetch 함수 사용 -->
 <template>
   <div class="header">
     <ul class="header-button-left">
@@ -11,7 +15,12 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시글 = "게시글"/>
+  <Container :게시글="게시글" />
+
+  <!-- 더보기 버튼을 누르면 
+    1. 서버에서 추가 게시물을 가져옴
+    2. 그걸 <Post>로 보여줌 -->
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -24,16 +33,36 @@
 <script>
 import Container from "./components/Container.vue";
 import postdata from "./assets/postdata.js";
+import axios from "axios";
+axios.get();
 
 export default {
   name: "App",
   data() {
     return {
-      게시글 : postdata,
+      게시글: postdata,
+      더보기: 0,
     };
   },
   components: {
     Container,
+  },
+  methods: {
+    more() {
+      axios
+        //.post() : post요청
+        //.catch() : 실패 시 실행할 코드
+        .get(`https://codingapple1.github.io/vue/more${this.더보기}.json`) //백틱 주의
+        .then((결과) => {
+          //arrow function을 사용해야 this 사용이 간편함
+          console.log(결과.data); //요청 성공 시 실행할 코드
+          this.게시글.push(결과.data);
+          this.더보기++;
+        })
+        .catch(() => {
+          console.log("GET 요청을 실패했습니다.");
+        });
+    },
   },
 };
 </script>
