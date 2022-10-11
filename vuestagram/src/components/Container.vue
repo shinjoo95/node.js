@@ -1,0 +1,24 @@
+<template>
+  <div>
+    <Post/>
+    <Post/>
+    <Post/>
+  </div>
+</template>
+
+<script>
+import Post from './Post.vue';
+
+export default {
+  components : {
+    Post,
+  },
+  props : {
+    게시글 : Array,
+  }
+}
+</script>
+
+<style>
+  
+</style>
