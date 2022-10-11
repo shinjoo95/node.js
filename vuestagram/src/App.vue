@@ -15,7 +15,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시글="게시글" />
+  <Container :게시글="게시글" :step="step"/>
 
   <!-- 더보기 버튼을 누르면 
     1. 서버에서 추가 게시물을 가져옴
@@ -28,6 +28,18 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+  <!-- tab 만들기 
+    동적 UI 만드는 법
+    1. UI 현재 상태를 데이터로 만들기
+    2. 상태에 따라 HTML이 어떻게 보일지 
+  <div v-if="step ==0">내용0</div>
+  <div v-if="step ==1">내용1</div>
+  <div v-if="step ==2">내용2</div>
+  <button @click="step = 0">버튼0</button>
+  <button @click="step = 1">버튼1</button>
+  <button @click="step = 2">버튼2</button>
+  <div style="margin-top : 500px;"></div> -->
 </template>
 
 <script>
@@ -42,6 +54,7 @@ export default {
     return {
       게시글: postdata,
       더보기: 0,
+      step: 0, //현재 페이지 상태 저장 
     };
   },
   components: {
