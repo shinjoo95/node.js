@@ -14,21 +14,28 @@
       step이 1이면 필터 선택화면
       step이 2이면 글쓰는 화면이 보여야됨-->
     <div v-if="step == 1">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :style="`background-image:url(${이미지})`"
+      ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox :이미지="이미지" :필터="필터" v-for="필터 in 필터명" :key="필터"></FilterBox>
       </div>
     </div>
 
     <!-- 글작성페이지 -->
-    <div v-if="step == 1">
-      <div class="upload-image"></div>
+    <div v-if="step == 2">
+      <div
+        class="upload-image"
+        :style="`background-image:url(${이미지})`"
+      ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          @input="$emit('write', $event.target.value)"
+          class="write-box"
+        >
+write!</textarea
+        >
       </div>
     </div>
   </div>
@@ -36,14 +43,49 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
+  data() {
+    return {
+      필터명: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+    };
+  },
   components: {
     Post,
+    FilterBox,
   },
   props: {
     게시글: Array,
     step: Number,
+    이미지: String,
   },
 };
 </script>

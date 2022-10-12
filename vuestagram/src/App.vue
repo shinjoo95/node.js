@@ -10,36 +10,43 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <!-- 글 발행 기능 
+        발행버튼을 누르면 this.게시물에 {내가 작성한 글} 넣기 -->
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시글="게시글" :step="step"/>
+  <Container @write="작성글 = $event" :게시글="게시글" :step="step" :이미지="이미지"/>
 
   <!-- 더보기 버튼을 누르면 
     1. 서버에서 추가 게시물을 가져옴
     2. 그걸 <Post>로 보여줌 -->
-  <button @click="more">더보기</button>
+  <button v-if="step == 0" @click="more">더보기</button>
 
+  <!-- 이미지 업로드 : FileReader(), URL.createObjectURL() -->
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <!-- 파일 업로드시 코드 실행하려면 @change="", input 여러개 다룰라면 multiple, 
+      이미지만 선택할 수 있게면(이미지만 보여주세요) accept="image/*" -->
+      <input @change="upload" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
 
-  <!-- tab 만들기 
+  <!-- 
+  tab 만들기 
     동적 UI 만드는 법
     1. UI 현재 상태를 데이터로 만들기
     2. 상태에 따라 HTML이 어떻게 보일지 
   <div v-if="step ==0">내용0</div>
   <div v-if="step ==1">내용1</div>
-  <div v-if="step ==2">내용2</div>
-  <button @click="step = 0">버튼0</button>
-  <button @click="step = 1">버튼1</button>
-  <button @click="step = 2">버튼2</button>
-  <div style="margin-top : 500px;"></div> -->
+  <div v-if="step ==2">내용2</div> -->
+  <button @click="step = 0">게시글</button>
+  <button @click="step = 1">필터선택</button>
+  <button @click="step = 2">댓글</button>
+  <div style="margin-top: 50px"></div>
 </template>
 
 <script>
@@ -52,15 +59,39 @@ export default {
   name: "App",
   data() {
     return {
+      작성글: "",
       게시글: postdata,
       더보기: 0,
-      step: 0, //현재 페이지 상태 저장 
+      step: 0, //현재 페이지 상태 저장
+      이미지: "", //변수 공간(url)
     };
   },
   components: {
     Container,
   },
   methods: {
+    publish() {
+      var 내게시물 = {
+      name: "Shin Joo",
+      userImage: "https://placeimg.com/100/100/arch",
+      postImage: this.이미지,
+      likes: 150,
+      date: "May 15",
+      liked: false,
+      content: this.작성글,
+      filter: "perpetua",
+      };
+      this.게시글.unshift(내게시물)   //왼쪽의 array에 자료를 넣는 함수 unshift
+      this.step = 0;
+    },
+    upload(e) {
+      let 파일 = e.target.files;
+      let url = URL.createObjectURL(파일[0]); //임시 url을 만들어 업로드한 이미지를 넣어줌
+      //0과 1로 이루어진 binary 데이터를 다룰 땐 BLOB이라는 object에 담아서 다룸
+      console.log(url);
+      this.이미지 = url;
+      this.step = 1; //업로드 후 다음 페이지로 이동
+    },
     more() {
       axios
         //.post() : post요청
