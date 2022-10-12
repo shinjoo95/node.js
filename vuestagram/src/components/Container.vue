@@ -16,6 +16,7 @@
     <div v-if="step == 1">
       <div
         class="upload-image"
+        :class="선택필터"
         :style="`background-image:url(${이미지})`"
       ></div>
       <div class="filters">
@@ -28,6 +29,7 @@
     <!-- 글작성페이지 -->
     <div v-if="step == 2">
       <div
+        :class="선택필터"
         class="upload-image"
         :style="`background-image:url(${이미지})`"
       ></div>
@@ -78,7 +80,15 @@ export default {
         "willow",
         "xpro2",
       ],
-    };
+        선택필터 : "",
+    }
+  },
+  //mitt로 데이터 전송하는법 (FilterBox.vue)
+  mounted(){
+    this.emitter.on('필터클릭', (a) => {
+      this.선택필터 = a
+
+    });
   },
   components: {
     Post,

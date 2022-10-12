@@ -5,7 +5,7 @@
       <span class="profile-name">{{게시글.name}}</span>
     </div>
     <!-- :style="" 집어 넣을 때 object자료도 가능, 백틱기호로 문자 만들기 `문자${변수}문자`-->
-    <div class="post-body" :style="{backgroundImage: `url(${게시글.postImage})` }"></div>      
+    <div :class="게시글.filter" class="post-body" :style="{backgroundImage: `url(${게시글.postImage})` }"></div>      
     <div class="post-content">
       <p>{{게시글.likes}} Likes</p>
       <p><strong>{{게시글.name}}</strong> {{게시글.content}}</p>

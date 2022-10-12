@@ -18,7 +18,12 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container @write="작성글 = $event" :게시글="게시글" :step="step" :이미지="이미지"/>
+  <Container
+    @write="작성글 = $event"
+    :게시글="게시글"
+    :step="step"
+    :이미지="이미지"
+  />
 
   <!-- 더보기 버튼을 누르면 
     1. 서버에서 추가 게시물을 가져옴
@@ -64,24 +69,32 @@ export default {
       더보기: 0,
       step: 0, //현재 페이지 상태 저장
       이미지: "", //변수 공간(url)
+      선택필터: '',
     };
+  },
+  mounted(){
+    this.emitter.on('필터클릭', (a) => {
+      this.선택필터 = a
+
+    });
   },
   components: {
     Container,
   },
+
   methods: {
     publish() {
       var 내게시물 = {
-      name: "Shin Joo",
-      userImage: "https://placeimg.com/100/100/arch",
-      postImage: this.이미지,
-      likes: 150,
-      date: "May 15",
-      liked: false,
-      content: this.작성글,
-      filter: "perpetua",
+        name: "Shin Joo",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.이미지,
+        likes: 150,
+        date: "May 15",
+        liked: false,
+        content: this.작성글,
+        filter: this.선택필터
       };
-      this.게시글.unshift(내게시물)   //왼쪽의 array에 자료를 넣는 함수 unshift
+      this.게시글.unshift(내게시물); //왼쪽의 array에 자료를 넣는 함수 unshift
       this.step = 0;
     },
     upload(e) {
