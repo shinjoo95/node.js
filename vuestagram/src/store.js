@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createStore } from "vuex";
 
 const store = createStore({
@@ -7,6 +8,7 @@ const store = createStore({
             age : 20,
             likes : 30,
             좋아요클릭 : false,
+            more:{},
         }
     },
     mutations : {
@@ -25,7 +27,19 @@ const store = createStore({
             state.좋아요클릭 = false;
         }
         },
-    }
+        setMore(state, data){
+            state.more=data
+        },
+    },
+    actions :{      // ajax하는 곳, 혹은 오래 걸리는 작업들 
+        getData(context){
+            axios.get('https://codingapple1.github.io/vue/more0.json')
+            .then((a)=>{
+                console.log(a.data)
+                context.commit('setMore', a.data)
+            })
+        },
+    },
 })
 export default store;
 //하위 컴포넌트 전송은 props
@@ -35,3 +49,9 @@ export default store;
 
 //main.js에 import
 //모든 컴포넌트에서 사용 가능
+
+//action 더보기
+//1. dispatch('getData')
+//2. ajax로 데이터를 가져오는데 
+//3. mutations를 이용해서 state에 저장 
+//결론 - ajax는 actions에서 state변경은 mutations에서 사용 

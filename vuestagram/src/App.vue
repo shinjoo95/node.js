@@ -32,6 +32,12 @@
   <p>나이 {{ $store.state.age }}</p>
   <button @click="$store.commit('나이증가',10)">버튼</button>  10 은 데이터를 보내는 곳 -->
 
+  <!-- Vuex - action : more 기능 추가하기 
+    action 함수를 불러와주는 dispatch
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기버튼</button> -->
+
+
   <Container
     @write="작성글 = $event"
     :게시글="게시글"
