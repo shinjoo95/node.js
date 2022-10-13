@@ -37,6 +37,8 @@
   <p>{{ $store.state.more }}</p>
   <button @click="$store.dispatch('getData')">더보기버튼</button> -->
 
+  <!-- mapstate -->
+  <!-- <p>{{name}} {{age}} {{likes}}</p> -->
 
   <Container
     @write="작성글 = $event"
@@ -44,6 +46,7 @@
     :step="step"
     :이미지="이미지"
   />
+
 
   <!-- 더보기 버튼을 누르면 
     1. 서버에서 추가 게시물을 가져옴
@@ -78,6 +81,7 @@
 import Container from "./components/Container.vue";
 import postdata from "./assets/postdata.js";
 import axios from "axios";
+import {mapMutations, mapState} from 'vuex'
 axios.get();
 
 export default {
@@ -90,6 +94,7 @@ export default {
       step: 0, //현재 페이지 상태 저장
       이미지: "", //변수 공간(url)
       선택필터: "",
+      카운터:0,
     };
   },
   mounted() {
@@ -100,8 +105,28 @@ export default {
   components: {
     Container,
   },
-
-  methods: {
+  methods : { //vuex mutations 한번에 꺼내쓰려면 ...mapMutation([])
+    ...mapMutations(['setMore', '좋아요'])
+  },
+  computed:{    //꼭 return이 있어야됨 
+    name(){
+      return this.$store.state.name
+    },
+    ...mapState(['name', 'age','likes']),    //vuex state 한번에 꺼내 쓰려면
+    ...mapState({ 작명 : 'name',})            //object 로 state 작명가능 
+  },
+  // computed : {
+  //   //methods vs computed
+  //   //methods 함수는 사용할 때마다 실행됨
+  //   //computed 함수는 사용해도 실행이 되지 않음, 처음 실행하고 값을 간직함 
+  //   now2(){
+  //     return new Date() //현재시각
+  //   },
+  // },
+  // methods: {
+  //   now(){
+  //     return new Date() //현재시각
+  //   },
     publish() {
       var 내게시물 = {
         name: "Shin Joo",
@@ -139,8 +164,7 @@ export default {
           console.log("GET 요청을 실패했습니다.");
         });
     },
-  },
-};
+}
 </script>
 
 <style>
