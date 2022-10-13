@@ -18,6 +18,13 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <!-- store.js에 있는 state 꺼내 쓰는 방법-->
+  <!-- <h4>안녕 {{ $store.state.name }}</h4> -->
+  <!-- store.js에 있는 state 변경하는 방법-->
+  <!-- <button @click="$store.state.name = '박'">버튼</button> -->
+  <!--(Vuex 국룰) 컴포넌트 안에서 직접 수정하기 금지
+  수정하고 싶으면 미리 store.js에 수정방법을 정의해두고 컴포넌트에서 소환해서 수정해야됨 -->
+
   <Container
     @write="작성글 = $event"
     :게시글="게시글"
@@ -69,13 +76,12 @@ export default {
       더보기: 0,
       step: 0, //현재 페이지 상태 저장
       이미지: "", //변수 공간(url)
-      선택필터: '',
+      선택필터: "",
     };
   },
-  mounted(){
-    this.emitter.on('필터클릭', (a) => {
-      this.선택필터 = a
-
+  mounted() {
+    this.emitter.on("필터클릭", (a) => {
+      this.선택필터 = a;
     });
   },
   components: {
@@ -92,7 +98,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.작성글,
-        filter: this.선택필터
+        filter: this.선택필터,
       };
       this.게시글.unshift(내게시물); //왼쪽의 array에 자료를 넣는 함수 unshift
       this.step = 0;
