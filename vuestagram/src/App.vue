@@ -18,12 +18,19 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <!-- store.js에 있는 state 꺼내 쓰는 방법-->
-  <!-- <h4>안녕 {{ $store.state.name }}</h4> -->
-  <!-- store.js에 있는 state 변경하는 방법-->
-  <!-- <button @click="$store.state.name = '박'">버튼</button> -->
-  <!--(Vuex 국룰) 컴포넌트 안에서 직접 수정하기 금지
-  수정하고 싶으면 미리 store.js에 수정방법을 정의해두고 컴포넌트에서 소환해서 수정해야됨 -->
+  <!-- 
+  Vuex
+  store.js에 있는 state 꺼내 쓰는 방법
+  <h4>안녕 {{ $store.state.name }}</h4>
+  store.js에 있는 state 변경하는 방법
+  <button @click="$store.commit('이름변경')">버튼</button> 
+  (Vuex 국룰) 컴포넌트 안에서 직접 수정하기 금지
+  수정하고 싶으면 미리 store.js에 수정방법을 정의해두고 컴포넌트에서 소환해서 수정해야됨 
+  버튼을 누르면 state를 '박'으로 변경 (store.js)
+  1. store.js에 state 수정 방법 정의 / 2. 수정하고 싶으면 store.js에 부탁  $store.commit(함수명)
+  장점: state 변경은 store.js만 함, state가 이상하면 store.js만 확인하면 됨 
+  <p>나이 {{ $store.state.age }}</p>
+  <button @click="$store.commit('나이증가',10)">버튼</button>  10 은 데이터를 보내는 곳 -->
 
   <Container
     @write="작성글 = $event"
