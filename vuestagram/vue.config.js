@@ -1,9 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  lintOnSave: false
-})
-module.exports = {
+  lintOnSave:false,
   pwa: {
     name: '님 앱이름',
     themeColor: '#4DBA87',
@@ -12,4 +10,4 @@ module.exports = {
       exclude: [/\.map$/, /manifest\.json$/, 'index.html']
     }
   }
-}
+})
