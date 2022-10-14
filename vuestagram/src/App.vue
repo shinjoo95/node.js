@@ -246,3 +246,12 @@ ul {
   border-left: 1px solid #eee;
 }
 </style>
+
+<!-- 모바일 환경으로 만들어주는 pwa
+  pwa 모바일 화면으로 구성시켜줌 
+  vue add pwa  -> registerServiceWorker 파일 생성
+  npm run build -> dist 파일 생성
+  1. manifest.json 앱 정보 담는 파일
+  2. service-worker.js 오프라인에서도 파일들을 사용 가능 
+  - 웹페이지 구동에 필요한 html css img를 하드에 저장시켜놓음
+  - 하드에 있는 정보들을 안내함 -->
